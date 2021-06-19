@@ -1,5 +1,6 @@
 {
   "name" : "Discourse Umbrella Connector",
+  "component" : true,
   "about_url" : "https://github.com/Umbrella-CAST/discourse-umbrella-connector",
   "license_url": "https://github.com/Umbrella-CAST/discourse-umbrella-connector/blob/master/LICENSE"
 }
