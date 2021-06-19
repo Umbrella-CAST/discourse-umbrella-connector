@@ -1,0 +1,4 @@
+base_url:
+  default: "https://example.com/path"
+  description:
+    en: "The connector will add trailing, slash-delimited parameters (aka PATH_INFO) to this base URL before making each AJAX connection."
