@@ -1,0 +1,46 @@
+<script type="text/discourse-plugin" version="0.8">
+
+const settings_base_url = settings.base_url;
+
+var UMBCONN = {
+    load: function(target, base, path) {
+        var url = base + path;
+        if ( null != api.getCurrentUser() ) {
+            url = url +'/u' +api.getCurrentUser().username;
+        }
+        $.ajax({
+            method: "GET",
+            url: url,
+            async: false,
+            dataType: "text",
+            success: function(data) {
+                $(target).html('');
+                $(target).append(data);
+            }
+        });
+        $(target).find('a').each(function(){
+            if ( $(this).data('onclick') ) {
+                $(this).click(function(e) {
+                    var target = $('div[data-umbconn]');
+                    UMBCONN.load(target, settings_base_url, $(this).data('onclick'));
+                });
+            }
+        });
+    },
+}
+
+$.fn.umbconn = function() {
+    this.each(
+        function() {
+            UMBCONN.load(this, settings_base_url, $(this).data('umbconn'));
+        }
+    );
+    return this;
+};
+
+api.decorateCooked(
+    $elem => $elem.children('.cooked div[data-umbconn]').umbconn(),
+    { id: 'umbconn' }
+);
+
+</script>
