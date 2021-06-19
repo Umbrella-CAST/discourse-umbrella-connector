@@ -19,10 +19,10 @@ var UMBCONN = {
             }
         });
         $(target).find('a').each(function(){
-            if ( $(this).data('onclick') ) {
+            if ( $(this).data('umbconn-onclick') ) {
                 $(this).click(function(e) {
                     var target = $('div[data-umbconn]');
-                    UMBCONN.load(target, settings_base_url, $(this).data('onclick'));
+                    UMBCONN.load(target, settings_base_url, $(this).data('umbconn-onclick'));
                 });
             }
         });
