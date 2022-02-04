@@ -15,16 +15,29 @@ var UMBCONN = {
             async: false,
             dataType: "text",
             success: function(data) {
-                $(target).html('');
-                $(target).append(data);
-            }
-        });
-        $(target).find('a').each(function(){
-            if ( $(this).data('umbconn-onclick') ) {
-                $(this).click(function(e) {
-                    var target = $('div[data-umbconn]');
-                    UMBCONN.load(target, settings_base_url, $(this).data('umbconn-onclick'));
-                });
+                if ( data.includes('data-umbconn-onclick') ) {
+                    // the enclosing DIV may have static placeholder content
+                    // which would be visible in non-parsed contexts, (forwarded
+                    // in email, or in a topic preview string.)
+                    $(target).html('');
+                    // append, preserving the enclosing DIV
+                    $(target).append(data);
+                    // check all the anchors in the appended elements and add
+                    // a function to the click events that want to invoke this
+                    // connector component
+                    $(target).find('a').each(function(){
+                        if ( $(this).data('umbconn-onclick') ) {
+                            $(this).click(function() {
+                                var target = $('div[data-umbconn]');
+                                UMBCONN.load(target, settings_base_url, $(this).data('umbconn-onclick'));
+                            });
+                        }
+                    });
+                }
+                else {
+                    // make the new nodes be direct siblings, replacing the div
+                    $(target).replaceWith(data);
+                }
             }
         });
     },
