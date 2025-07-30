@@ -1,7 +1,6 @@
 import { apiInitializer } from "discourse/lib/api";
 
 export default apiInitializer("0.8", (api) => {
-  console.log("[umbconn] initializer loaded");
 
   const settings_base_url = settings.base_url;
 
@@ -62,7 +61,6 @@ export default apiInitializer("0.8", (api) => {
 
   // run after cooked content renders (same hook name/id)
   api.decorateCooked(($elem) => {
-    console.log("[umbconn] decorateCooked fired");
     const $targets = $elem.find("div[data-umbconn]");
     if ($targets.length) {
         $targets.umbconn();
