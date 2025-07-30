@@ -1,5 +1,4 @@
 import { apiInitializer } from "discourse/lib/api";
-import { settings } from "discourse/lib/theme-settings";
 
 export default apiInitializer("0.8", (api) => {
   console.log("[umbconn] initializer loaded");
