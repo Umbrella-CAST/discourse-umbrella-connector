@@ -1,7 +1,7 @@
 import { apiInitializer } from "discourse/lib/api";
 import { settings } from "discourse/lib/theme-settings";
 
-export default apiInitializer("1.61.0", (api) => {
+export default apiInitializer("0.8", (api) => {
   const settings_base_url = settings.base_url;
 
   const UMBCONN = {
