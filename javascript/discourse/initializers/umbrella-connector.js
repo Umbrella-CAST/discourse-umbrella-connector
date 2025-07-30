@@ -2,6 +2,8 @@ import { apiInitializer } from "discourse/lib/api";
 import { settings } from "discourse/lib/theme-settings";
 
 export default apiInitializer("0.8", (api) => {
+  console.log("[umbconn] initializer loaded");
+
   const settings_base_url = settings.base_url;
 
   const UMBCONN = {
@@ -20,6 +22,7 @@ export default apiInitializer("0.8", (api) => {
         method: "GET",
         url,
         dataType: "text",
+        async: false,
         success: function (data) {
           if (data.includes("data-umbconn-onclick")) {
             // same behavior: clear placeholder, append server-provided HTML
@@ -60,6 +63,7 @@ export default apiInitializer("0.8", (api) => {
 
   // run after cooked content renders (same hook name/id)
   api.decorateCooked(
+    console.log("[umbconn] decorateCooked fired");
     ($elem) => {
       // $elem is already the cooked container; search inside it
       const $targets = $elem.find("div[data-umbconn]");
