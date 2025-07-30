@@ -62,15 +62,12 @@ export default apiInitializer("0.8", (api) => {
   };
 
   // run after cooked content renders (same hook name/id)
-  api.decorateCooked(
+  api.decorateCooked(($elem) => {
     console.log("[umbconn] decorateCooked fired");
-    ($elem) => {
-      // $elem is already the cooked container; search inside it
-      const $targets = $elem.find("div[data-umbconn]");
-      if ($targets && $targets.length) {
+    const $targets = $elem.find("div[data-umbconn]");
+    if ($targets.length) {
         $targets.umbconn();
-      }
-    },
-    { id: "umbconn" }
-  );
+    }
+  }, { id: "umbconn" });
+
 });
